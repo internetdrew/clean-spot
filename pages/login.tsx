@@ -27,15 +27,15 @@ const login = () => {
 
   return (
     <>
-      <section className='bg-[#ede0d4] h-screen relative flex flex-col items-center justify-center gap-20'>
+      <section className='bg-[#ede0d4] h-screen relative flex flex-col items-center justify-center gap-20 px-4'>
         <div className='text-center'>
-          <h1 className='text-xl sm:text-2xl'>Clean Spot</h1>
-          <p className='text-lg sm:text-xl'>
+          <h1 className='text-3xl'>Clean Spot</h1>
+          <p className='text-xl'>
             Clean your favorite explicit Spotify playlists with ease.
           </p>
         </div>
         <div className='text-center'>
-          <button className='p-2 border-solid border-2 border-black text-sm sm:text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'>
+          <button className='p-2 border-solid border-2 border-black text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'>
             <a href={authUrl}>Login with Spotify</a>
           </button>
         </div>
