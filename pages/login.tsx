@@ -27,21 +27,23 @@ const login = () => {
 
   return (
     <>
-      <section className='bg-[#ede0d4] h-screen flex justify-center items-center'>
-        <div className='flex flex-col gap-20'>
-          <div className='text-center'>
-            <h1 className='text-3xl'>Clean Spot</h1>
-            <p className='text-xl'>
-              Clean your favorite explicit Spotify playlists with ease.
-            </p>
+      <div className='h-screen'>
+        <section className='bg-[#ede0d4] h-full flex justify-center items-center'>
+          <div className='flex flex-col gap-20'>
+            <div className='text-center'>
+              <h1 className='text-3xl'>Clean Spot</h1>
+              <p className='text-xl'>
+                Clean your favorite explicit Spotify playlists with ease.
+              </p>
+            </div>
+            <div className='text-center'>
+              <button className='p-2 border-solid border-2 border-black text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'>
+                <a href={authUrl}>Login with Spotify</a>
+              </button>
+            </div>
           </div>
-          <div className='text-center'>
-            <button className='p-2 border-solid border-2 border-black text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'>
-              <a href={authUrl}>Login with Spotify</a>
-            </button>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 };
