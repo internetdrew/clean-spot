@@ -2,19 +2,19 @@ import { loadGetInitialProps } from 'next/dist/shared/lib/utils';
 import { useState, useEffect } from 'react';
 
 const login = () => {
-  const [redicrectUri, setRedirectUri] = useState('');
+  const [redirectUri, setRedirectUri] = useState('');
 
   const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
   const responseType = 'code';
   const authEndpoint = 'https://accounts.spotify.com/authorize?';
-  const authUrl = `${authEndpoint}client_id=${clientId}&redirect_uri=${redicrectUri}&response_type=${responseType}`;
+  const authUrl = `${authEndpoint}client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}`;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const origin = window.location.origin;
       setRedirectUri(origin);
     }
-  }, [redicrectUri]);
+  }, [redirectUri]);
 
   return (
     <>
