@@ -1,3 +1,4 @@
+import { ChildProcess } from 'child_process';
 import { useState, useEffect } from 'react';
 import { v4 } from 'uuid';
 
@@ -10,9 +11,10 @@ const login = () => {
       const random = v4();
       setAuthKey(random);
     }
-
     setWindowOrigin(window.location.origin);
   }, []);
+
+  console.log(windowOrigin);
 
   // const redirect = 'http://localhost:3000';
   const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
