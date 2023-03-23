@@ -1,28 +1,11 @@
-import { useState, useEffect } from 'react';
+import { v4 } from 'uuid';
+import { useEffect } from 'react';
 
 const login = () => {
-  const [redirectUri, setRedirectUri] = useState('');
-  const [spotifyStateStr, setSpotifyStateStr] = useState('');
-
+  const stateValue = 'stable';
+  const redirect = 'http://localhost:3000';
   const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
-  const responseType = 'code';
-  const authEndpoint = 'https://accounts.spotify.com/authorize?';
-  const authUrl = `${authEndpoint}client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&state=${spotifyStateStr}`;
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const origin = window.location.origin;
-      setRedirectUri(origin);
-    }
-  }, [redirectUri]);
-
-  useEffect(() => {
-    const random16 = crypto
-      .getRandomValues(new Uint8Array(16))
-      .join('')
-      .toString();
-    setSpotifyStateStr(random16);
-  }, []);
+  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirect}&response_type=code&state=1234`;
 
   return (
     <>
