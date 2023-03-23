@@ -1,11 +1,20 @@
+import { useState, useEffect } from 'react';
 import { v4 } from 'uuid';
-import { useEffect } from 'react';
 
 const login = () => {
-  const stateValue = 'stable';
+  const [authKey, setAuthKey] = useState('');
+
+  useEffect(() => {
+    if (!authKey) {
+      const random = v4();
+      setAuthKey(random);
+    }
+  }, []);
+
   const redirect = 'http://localhost:3000';
   const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
-  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirect}&response_type=code&state=1234`;
+  const resType = 'code';
+  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirect}&response_type=${resType}&state=${authKey}`;
 
   return (
     <>
