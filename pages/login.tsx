@@ -3,18 +3,21 @@ import { v4 } from 'uuid';
 
 const login = () => {
   const [authKey, setAuthKey] = useState('');
+  const [windowOrigin, setWindowOrigin] = useState('');
 
   useEffect(() => {
     if (!authKey) {
       const random = v4();
       setAuthKey(random);
     }
+
+    setWindowOrigin(window.location.origin);
   }, []);
 
-  const redirect = 'http://localhost:3000';
+  // const redirect = 'http://localhost:3000';
   const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
   const resType = 'code';
-  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirect}&response_type=${resType}&state=${authKey}`;
+  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${windowOrigin}&response_type=${resType}&state=${authKey}`;
 
   return (
     <>
