@@ -27,7 +27,7 @@ const login = () => {
 
   return (
     <>
-      <section className='bg-red-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%]'>
+      <section className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%]'>
         <div className='flex flex-col gap-20'>
           <div className='text-center'>
             <h1 className='text-3xl'>Clean Spot</h1>
