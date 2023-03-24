@@ -27,7 +27,8 @@ const login = ({ authUrl, authState }: any) => {
 };
 
 export const getServerSideProps = async (context: any) => {
-  const res = await fetch('http://localhost:3000/api/login');
+  const baseUrl = `http://${context.req.headers.host}`;
+  const res = await fetch(`${baseUrl}/api/login`);
   const authUrl = await res.json();
   return { props: { authUrl: authUrl.url, authState: authUrl.authState } };
 };
