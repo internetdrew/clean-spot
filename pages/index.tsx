@@ -19,12 +19,6 @@ export default function Home() {
     const authStateValue = router.query.state || null;
 
     // if (authStateValue === null) Router.push('/login');
-
-    const authParams = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: {},
-    };
   }, []);
 
   return (

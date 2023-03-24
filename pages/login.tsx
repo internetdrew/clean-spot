@@ -1,26 +1,4 @@
-import { ChildProcess } from 'child_process';
-import { useState, useEffect } from 'react';
-import { v4 } from 'uuid';
-
-const login = () => {
-  const [authKey, setAuthKey] = useState('');
-  const [windowOrigin, setWindowOrigin] = useState('');
-
-  useEffect(() => {
-    if (!authKey) {
-      const random = v4();
-      setAuthKey(random);
-    }
-    setWindowOrigin(window.location.origin);
-  }, []);
-
-  console.log(windowOrigin);
-
-  // const redirect = 'http://localhost:3000';
-  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
-  const resType = 'code';
-  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${windowOrigin}&response_type=${resType}&state=${authKey}`;
-
+const login = ({ authUrl }: any) => {
   return (
     <>
       <section className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%]'>
@@ -41,6 +19,12 @@ const login = () => {
       </section>
     </>
   );
+};
+
+export const getServerSideProps = async (context: any) => {
+  const res = await fetch('http://localhost:3000/api/login');
+  const authUrl = await res.json();
+  return { props: { authUrl: authUrl.url } };
 };
 
 export default login;
