@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { tokenState } from '@/atoms/tokenAtom';
 
 export default function Home() {
+  const [user, setUser] = useState({});
   // console.log(user);
   const [token, setToken] = useRecoilState(tokenState);
 
@@ -18,7 +19,7 @@ export default function Home() {
         },
       })
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => setUser(data));
     } catch (err) {
       console.log(err);
     }
@@ -26,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <h1>hello world</h1>
+      <h1>hello {user.display_name}</h1>
     </>
   );
 }
