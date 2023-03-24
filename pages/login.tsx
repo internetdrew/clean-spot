@@ -1,4 +1,9 @@
-const login = ({ authUrl }: any) => {
+import { useEffect } from 'react';
+
+const login = ({ authUrl, authState }: any) => {
+  useEffect(() => {
+    window.localStorage.setItem('authState', authState);
+  }, []);
   return (
     <>
       <section className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%]'>
@@ -24,7 +29,7 @@ const login = ({ authUrl }: any) => {
 export const getServerSideProps = async (context: any) => {
   const res = await fetch('http://localhost:3000/api/login');
   const authUrl = await res.json();
-  return { props: { authUrl: authUrl.url } };
+  return { props: { authUrl: authUrl.url, authState: authUrl.authState } };
 };
 
 export default login;
