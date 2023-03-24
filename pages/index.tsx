@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <h1>hello {user.display_name}</h1>
+      <h1>hello {user?.display_name}</h1>
     </>
   );
 }
