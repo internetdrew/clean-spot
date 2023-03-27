@@ -28,25 +28,3 @@ export default function Home() {
     </>
   );
 }
-
-// export const getServerSideProps = async (context: any) => {
-//   const session = await getServerSession(context.req, context.res, authOptions);
-
-//   if (!session) return { redirect: { destination: '/login' } };
-
-//   const userRes = await fetch('https://api.spotify.com/v1/me', {
-//     headers: {
-//       Authorization: `Bearer ${session?.accessToken}`,
-//     },
-//   });
-//   const userInfo = await userRes.json();
-
-//   const playlistsRes = await fetch('https://api.spotify.com/v1/me/playlists', {
-//     headers: {
-//       Authorization: `Bearer ${session?.accessToken}`,
-//     },
-//   });
-//   const userPlaylists = await playlistsRes.json();
-
-//   return { props: { userInfo, userPlaylists } };
-// };

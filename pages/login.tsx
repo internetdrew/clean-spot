@@ -23,8 +23,9 @@ const login = ({ authUrl }: any) => {
 
 export default login;
 
-export const getServerSideProps = async () => {
-  const response = await fetch('http://localhost:3000/api/login');
+export const getServerSideProps = async ({ req, res }: any) => {
+  const baseUrl = req.headers.referer.split('/login')[0];
+  const response = await fetch(`${baseUrl}/api/login`);
   const { authUrl } = await response.json();
   return { props: { authUrl } };
 };
