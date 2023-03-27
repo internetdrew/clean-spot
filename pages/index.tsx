@@ -1,12 +1,27 @@
 import { useEffect, useState } from 'react';
 
-export default function Home({ accessToken }: any) {
+type User = {
+  display_name: string;
+};
+
+export default function Home() {
   const [token, setToken] = useState({});
-  console.log(token);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    setToken(window.location.hash.split('&')[0].split('=')[1]);
+    console.log(token);
+
+    fetch('https://api.spotify.com/v1/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then(res => res.json())
+      .then(data => setUser(data));
+  }, [token]);
 
   return (
     <>
-      <h1>hello</h1>
+      <h1>hello {user.display_name}</h1>
       {/* <section className='h-screen text-center flex flex-col items-center justify-center'>
         <button onClick={signOut}>Sign out</button>
         <h1>Test</h1>
@@ -33,18 +48,3 @@ export default function Home({ accessToken }: any) {
     </>
   );
 }
-
-export const getServerSideProps = async () => {
-  const authParams = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `grant_type=client_credentials&client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&client_secret=${process.env.NEXT_PUBLIC_CLIENT_SECRET}`,
-  };
-  const res = await fetch('https://accounts.spotify.com/api/token', authParams);
-  const data = await res.json();
-  console.log(data);
-
-  return { props: { accessToken: data.access_token } };
-};
