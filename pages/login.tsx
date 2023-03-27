@@ -23,17 +23,17 @@ const login = ({ authUrl, protocol }: any) => {
 
 export default login;
 
-export const getServerSideProps = async ({ req, res }: any) => {
-  const baseUrl = req.headers.referer.split('/login')[0];
-  console.log(baseUrl);
-  const protocol = req.headers.referer.split(':')[0] + '://';
-  console.log(protocol);
-  const response = await fetch(`${baseUrl}/api/login`, {
-    method: 'POST',
-    body: baseUrl,
-  });
-  console.log(response);
-  const { authUrl } = await response.json();
-  console.log(authUrl);
-  return { props: { authUrl, protocol } };
-};
+// export const getServerSideProps = async ({ req, res }: any) => {
+//   const baseUrl = req.headers.referer.split('/login')[0];
+//   console.log(baseUrl);
+//   const protocol = req.headers.referer.split(':')[0] + '://';
+//   console.log(protocol);
+//   const response = await fetch(`${baseUrl}/api/login`, {
+//     method: 'POST',
+//     body: baseUrl,
+//   });
+//   console.log(response);
+//   const { authUrl } = await response.json();
+//   console.log(authUrl);
+//   return { props: { authUrl, protocol } };
+// };
