@@ -1,4 +1,9 @@
-export default function Home() {
+import { useEffect, useState } from 'react';
+
+export default function Home({ accessToken }: any) {
+  const [token, setToken] = useState({});
+  console.log(token);
+
   return (
     <>
       <h1>hello</h1>
@@ -28,3 +33,18 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = async () => {
+  const authParams = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `grant_type=client_credentials&client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&client_secret=${process.env.NEXT_PUBLIC_CLIENT_SECRET}`,
+  };
+  const res = await fetch('https://accounts.spotify.com/api/token', authParams);
+  const data = await res.json();
+  console.log(data);
+
+  return { props: { accessToken: data.access_token } };
+};
