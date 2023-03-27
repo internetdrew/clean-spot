@@ -6,6 +6,6 @@ export default function handler(req, res) {
   const redirectUrl = `http://${req.headers.host}`;
 
   res.status(200).json({
-    authUrl: `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${authState}`,
+    authUrl: `accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${authState}`,
   });
 }
