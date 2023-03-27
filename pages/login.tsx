@@ -12,7 +12,7 @@ const login = ({ authUrl, protocol }: any) => {
           </div>
           <div className='text-center motion-safe:animate-bounce'>
             <button className='p-2 border-solid border-2 border-black text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'>
-              {/* <a href={`${protocol}${authUrl}`}>Login with Spotify</a> */}
+              <a href={`${protocol}${authUrl}`}>Login with Spotify</a>
             </button>
           </div>
         </div>
