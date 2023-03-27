@@ -10,14 +10,16 @@ export default function Home() {
   console.log(user);
 
   useEffect(() => {
-    setToken(window.location.hash.split('&')[0].split('=')[1]);
-    console.log(token);
+    if (token) {
+      setToken(window.location.hash.split('&')[0].split('=')[1]);
+      console.log(token);
 
-    fetch('https://api.spotify.com/v1/me', {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then(res => res.json())
-      .then(data => setUser(data));
+      fetch('https://api.spotify.com/v1/me', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then(res => res.json())
+        .then(data => setUser(data));
+    }
   }, [token]);
 
   return (
