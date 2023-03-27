@@ -1,8 +1,4 @@
-import { useSession, signIn } from 'next-auth/react';
-
-const login = () => {
-  const { data: session } = useSession();
-  console.log(session);
+const login = ({ authUrl }: any) => {
   return (
     <>
       <section className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%]'>
@@ -15,11 +11,8 @@ const login = () => {
             </p>
           </div>
           <div className='text-center motion-safe:animate-bounce'>
-            <button
-              className='p-2 border-solid border-2 border-black text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'
-              onClick={() => signIn('spotify', { callbackUrl: '/' })}
-            >
-              Login with Spotify
+            <button className='p-2 border-solid border-2 border-black text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'>
+              <a href={authUrl}>Login with Spotify</a>
             </button>
           </div>
         </div>
@@ -29,3 +22,9 @@ const login = () => {
 };
 
 export default login;
+
+export const getServerSideProps = async () => {
+  const response = await fetch('http://localhost:3000/api/login');
+  const { authUrl } = await response.json();
+  return { props: { authUrl } };
+};
