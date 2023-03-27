@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 
 type User = {
-  display_name: string;
+  display_name?: string;
 };
 
 export default function Home() {
   const [token, setToken] = useState({});
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<User>({});
+  console.log(user);
 
   useEffect(() => {
     setToken(window.location.hash.split('&')[0].split('=')[1]);
