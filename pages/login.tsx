@@ -1,6 +1,16 @@
+import { useEffect, useState } from 'react';
+import { v4 } from 'uuid';
 import Link from 'next/link';
 
 const login = ({ authUrl, protocol }: any) => {
+  const [redirectUrl, setRedirectUrl] = useState('');
+  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
+  const state = v4();
+
+  useEffect(() => {
+    setRedirectUrl(window.location.origin);
+  }, []);
+
   return (
     <>
       <section className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%]'>
@@ -14,8 +24,11 @@ const login = ({ authUrl, protocol }: any) => {
           </div>
           <div className='text-center motion-safe:animate-bounce'>
             <button className='p-2 border-solid border-2 border-black text-lg shadow-[2px_2px_2px_1px_rgb(0,0,0,1)] active:scale-90 transition-all ease-in-out duration-300'>
-              {/* <a href={`${protocol}${authUrl}`}>Login with Spotify</a> */}
-              <Link href={`${protocol}${authUrl}`}>Login with Spotify</Link>
+              <a
+                href={`https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=code&state=${state}`}
+              >
+                Login with Spotify
+              </a>
             </button>
           </div>
         </div>
@@ -25,22 +38,3 @@ const login = ({ authUrl, protocol }: any) => {
 };
 
 export default login;
-
-export const getServerSideProps = async ({ req, res }: any) => {
-  try {
-    const baseUrl = req.headers.referer.split('/login')[0];
-    console.log(baseUrl);
-    const protocol = req.headers.referer.split(':')[0] + '://';
-    console.log(protocol);
-    const response = await fetch(`${baseUrl}/api/login`, {
-      method: 'POST',
-      body: baseUrl,
-    });
-    console.log(response);
-    const { authUrl } = await response.json();
-    console.log(authUrl);
-    return { props: { authUrl, protocol } };
-  } catch (error) {
-    console.log(error);
-  }
-};
